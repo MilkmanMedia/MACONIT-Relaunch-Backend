@@ -8,6 +8,10 @@ import { getSiteSettings } from "@/lib/queries";
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
+// Content is served from Payload/Postgres and can change at any time via the
+// admin panel, so these routes render per-request rather than being baked in
+// at build time (which would also fail on a fresh DB with no schema yet).
+export const dynamic = "force-dynamic";
 
 export default async function LangLayout({
   children,
