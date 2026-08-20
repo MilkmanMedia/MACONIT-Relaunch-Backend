@@ -1,0 +1,26 @@
+import type { GlobalConfig } from "payload";
+
+// Maps to Kapitel 6.2 "Global Settings" — contact details shown in the
+// footer and on the Kontakt/Contact page. Editable without a developer.
+export const SiteSettings: GlobalConfig = {
+  slug: "site-settings",
+  access: { read: () => true },
+  fields: [
+    {
+      name: "locations",
+      type: "array",
+      minRows: 1,
+      fields: [
+        { name: "name", type: "text", required: true, localized: true },
+        { name: "street", type: "text", required: true },
+        { name: "zipCity", type: "text", required: true },
+        { name: "phone", type: "text", required: true },
+      ],
+      defaultValue: [
+        { name: "Puchheim", street: "Riedstr. 6", zipCity: "82178 Puchheim", phone: "+49 (0)89 72446904" },
+        { name: "München", street: "Freibadstr. 30", zipCity: "81543 München", phone: "+49 (0)89 122219940" },
+      ],
+    },
+    { name: "email", type: "text", defaultValue: "info@maconit.de" },
+  ],
+};
