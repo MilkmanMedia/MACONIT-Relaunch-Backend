@@ -2,11 +2,12 @@
   "name": "maconit-web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "www.maconit.de relaunch — Next.js (App Router) + Payload CMS, per Relaunch-Konzept Kapitel 6",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "payload migrate && next start",
     "lint": "next lint",
     "generate:types": "payload generate:types",
     "seed": "tsx scripts/seed.ts"
