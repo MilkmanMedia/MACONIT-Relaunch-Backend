@@ -7,6 +7,25 @@ export const SiteSettings: GlobalConfig = {
   access: { read: () => true },
   fields: [
     {
+      name: "maintenanceMode",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        description:
+          "Wenn aktiviert, sehen Besucher der Website (nicht das Admin-Panel) statt der normalen Inhalte eine Wartungsseite. Zum Wiederherstellen der Website hier einfach wieder deaktivieren.",
+      },
+    },
+    {
+      name: "maintenanceMessage",
+      type: "textarea",
+      localized: true,
+      admin: {
+        description:
+          "Optionaler Text auf der Wartungsseite. Bleibt das Feld leer, wird ein Standardtext angezeigt.",
+        condition: (_, siblingData) => Boolean(siblingData?.maintenanceMode),
+      },
+    },
+    {
       name: "locations",
       type: "array",
       minRows: 1,

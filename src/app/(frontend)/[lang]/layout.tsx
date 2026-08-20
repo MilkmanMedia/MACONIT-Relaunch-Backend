@@ -3,11 +3,13 @@ import { isLocale, locales, type Locale } from "@/lib/i18n";
 import { dictionaries } from "@/content/dictionaries";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Maintenance } from "@/components/Maintenance";
 import { getSiteSettings } from "@/lib/queries";
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
+
 // Content is served from Payload/Postgres and can change at any time via the
 // admin panel, so these routes render per-request rather than being baked in
 // at build time (which would also fail on a fresh DB with no schema yet).
@@ -26,6 +28,13 @@ export default async function LangLayout({
   const dict = dictionaries[lang as Locale];
   const settings = await getSiteSettings(lang as Locale);
   const altLang: Locale = lang === "de" ? "en" : "de";
+
+  // Admin-controlled kill switch (SiteSettings > "maintenanceMode" in
+  // /admin). Only locks the public (frontend) route group — /admin and /api
+  // stay reachable so the setting can always be switched back off.
+  if (settings?.maintenanceMode) {
+    return <Maintenance dict={dict} settings={settings} />;
+  }
 
   return (
     <>

@@ -75,6 +75,7 @@ export type Dictionary = {
     };
   };
   legal: { imprintTitle: string; imprintNote: string; privacyTitle: string; privacyNote: string };
+  maintenance: { title: string; defaultMessage: string };
 };
 
 const de: Dictionary = {
@@ -255,6 +256,11 @@ const de: Dictionary = {
     privacyTitle: "Datenschutz",
     privacyNote: "Bitte nach Festlegung von Hosting, Formular- und ggf. Tracking-Diensten juristisch prüfen und aktualisieren lassen.",
   },
+  maintenance: {
+    title: "Wir sind kurz nicht erreichbar",
+    defaultMessage:
+      "Wir führen gerade Wartungsarbeiten durch und sind in Kürze wieder für Sie da. Bei dringenden Anliegen erreichen Sie uns per E-Mail.",
+  },
 };
 
 const en: Dictionary = {
@@ -434,6 +440,11 @@ const en: Dictionary = {
     imprintNote: "Please carry over and have the existing legal notice from www.maconit.de reviewed and updated.",
     privacyTitle: "Privacy Policy",
     privacyNote: "Please have this reviewed and updated once hosting, form and any tracking services are finalised.",
+  },
+  maintenance: {
+    title: "We'll be back shortly",
+    defaultMessage:
+      "We're currently carrying out maintenance and will be back online shortly. For urgent matters, please reach us by email.",
   },
 };
 

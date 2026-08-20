@@ -66,4 +66,6 @@ export type Post = {
 export type SiteSetting = {
   locations: { name: string; street: string; zipCity: string; phone: string }[];
   email: string;
+  maintenanceMode?: boolean;
+  maintenanceMessage?: string;
 };
