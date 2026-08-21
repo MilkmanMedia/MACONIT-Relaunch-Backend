@@ -33,6 +33,18 @@ export function Header({
   const navRef = useRef<HTMLElement | null>(null);
   const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
 
+  // Header rests a bit larger, then eases into a more compact bar once the
+  // page has scrolled a little (desktop only — the md: classes below; on
+  // mobile the header stays a single fixed size, since the off-canvas nav
+  // panel anchors itself to that height, see the nav className below).
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useEffect(() => {
     const measure = () => {
       const nav = navRef.current;
@@ -44,13 +56,25 @@ export function Header({
       setIndicator({ left: active.offsetLeft, width: active.offsetWidth });
     };
     measure();
+    // Re-measure once more after the header's grow/shrink transition below
+    // has settled, so the sliding indicator ends up aligned with the nav
+    // link's post-transition position and width (not just its pre-scroll
+    // one) — matches the 300ms transition duration on the header/nav below.
+    const settleTimer = setTimeout(measure, 320);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [pathname]);
+    return () => {
+      window.removeEventListener("resize", measure);
+      clearTimeout(settleTimer);
+    };
+  }, [pathname, isScrolled]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white">
-      <div className="mx-auto flex h-[76px] max-w-container items-center justify-between px-6">
+      <div
+        className={`mx-auto flex h-[76px] max-w-container items-center justify-between px-6 transition-[height] duration-300 ease-out ${
+          isScrolled ? "" : "md:h-[92px]"
+        }`}
+      >
         <Link href={`/${lang}`} className="flex items-center" aria-label="MACONIT Home">
           <Image
             src="/maconit-logo.png"
@@ -58,7 +82,7 @@ export function Header({
             width={160}
             height={42}
             priority
-            className="h-[26px] w-auto"
+            className={`h-[26px] w-auto transition-[height] duration-300 ease-out ${isScrolled ? "" : "md:h-[32px]"}`}
           />
         </Link>
 
@@ -74,9 +98,9 @@ export function Header({
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               onClick={() => setOpen(false)}
-              className={`nav-link border-b border-line px-3.5 py-4 text-[15px] font-bold uppercase tracking-wide text-grey transition-colors hover:text-primary md:border-b-0 md:py-2.5 md:text-[13px] md:tracking-[.05em] ${
-                isActive(item.href) ? "text-primary" : ""
-              }`}
+              className={`nav-link border-b border-line px-3.5 py-4 text-[15px] font-bold uppercase tracking-wide text-grey transition-[color,padding,font-size] duration-300 ease-out hover:text-primary md:border-b-0 md:tracking-[.05em] ${
+                isScrolled ? "md:py-2.5 md:text-[13px]" : "md:py-[14px] md:text-[14px]"
+              } ${isActive(item.href) ? "text-primary" : ""}`}
             >
               {item.label}
             </Link>
