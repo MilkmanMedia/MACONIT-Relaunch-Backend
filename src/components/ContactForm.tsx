@@ -4,8 +4,12 @@ import { useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 
+// block avoids the few px of reserved descender space browsers give
+// inline-level form controls, which would otherwise sit between the
+// field's own bottom border and focusUnderlineClass's span below — showing
+// as an odd double line on focus, most visible on the multi-line textarea.
 const fieldClass =
-  "peer w-full border-0 border-b-[1.5px] border-line bg-transparent py-3.5 font-sans text-base transition-colors focus:border-primary focus:outline-none";
+  "peer block w-full border-0 border-b-[1.5px] border-line bg-transparent py-3.5 font-sans text-base transition-colors focus:border-primary focus:outline-none";
 
 // Focus underline grows in from the center, layered on top of the static
 // hairline border-bottom above (see fieldClass). Mirrors static-site's
@@ -24,6 +28,7 @@ export function ContactForm({
 
   return (
     <form
+      className="border-t border-line pt-10"
       onSubmit={(e) => {
         e.preventDefault();
         setSubmitted(true);
