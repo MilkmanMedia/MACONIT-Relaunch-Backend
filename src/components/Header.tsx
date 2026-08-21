@@ -64,7 +64,7 @@ export function Header({
 
         <nav
           ref={navRef}
-          className={`fixed inset-x-0 top-[76px] z-40 flex h-[calc(100vh-76px)] flex-col items-stretch gap-0 overflow-y-auto bg-white p-5 transition-transform duration-300 ease-out md:relative md:h-auto md:translate-y-0 md:flex-row md:items-center md:gap-0.5 md:bg-transparent md:p-0 md:transition-none ${
+          className={`fixed inset-x-0 top-[76px] z-40 flex h-[calc(100vh-76px)] flex-col items-stretch gap-0 overflow-y-auto bg-white p-5 transition-transform duration-300 ease-out md:relative md:inset-auto md:h-auto md:translate-y-0 md:flex-row md:items-center md:gap-0.5 md:bg-transparent md:p-0 md:transition-none ${
             open ? "translate-y-0" : "-translate-y-[120%]"
           }`}
         >
