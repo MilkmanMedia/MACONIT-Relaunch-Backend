@@ -78,7 +78,8 @@ export function Hero({
   }
 
   return (
-    <section id="hero" className="pb-20 pt-[100px]">
+    <section id="hero" className="relative overflow-hidden pb-20 pt-[100px]">
+      <HeroPattern />
       <div className="mx-auto max-w-container px-6">
         <div className="max-w-[900px]">
           {breadcrumb && (

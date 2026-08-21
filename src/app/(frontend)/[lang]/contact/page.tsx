@@ -29,7 +29,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
 
   return (
     <>
-      <Hero headline={c.headline} sub={c.sub} />
+      <Hero eyebrow={l === "de" ? "Kontakt" : "Contact"} headline={c.headline} sub={c.sub} />
       <section className="pb-16 pt-0">
         <div className="mx-auto grid max-w-container gap-[60px] px-6 md:grid-cols-[1.2fr_1fr]">
           <ContactForm labels={c.formLabels} lang={l} />

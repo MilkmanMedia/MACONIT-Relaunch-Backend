@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
-// Faint diagonal-line pattern behind the home hero copy (desktop only —
-// hidden below 860px via CSS, see globals.css). Fades in on mount, then
-// drifts a few pixels on scroll; both are skipped under reduced motion.
+// Faint diagonal-line pattern behind the hero copy, rendered on every hero
+// section — home and subpages alike (desktop only — hidden below 860px via
+// CSS, see globals.css). Fades in on mount, then drifts a few pixels on
+// scroll; both are skipped under reduced motion.
 //
 // IMPORTANT: the CSS keyframe (globals.css `.hero-pattern` / `@keyframes
 // heroPatternFade`) animates `opacity` ONLY. `transform` is left exclusively

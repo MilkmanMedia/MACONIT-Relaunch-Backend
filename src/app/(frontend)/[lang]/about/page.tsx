@@ -32,7 +32,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
 
   return (
     <>
-      <Hero headline={a.headline} sub={a.sub} />
+      <Hero eyebrow={l === "de" ? "Über uns" : "About"} headline={a.headline} sub={a.sub} />
 
       <section className="py-16">
         <div className="mx-auto grid max-w-container gap-8 px-6 md:grid-cols-2">
