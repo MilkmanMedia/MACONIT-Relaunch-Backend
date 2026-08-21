@@ -67,30 +67,11 @@ body {
 .stagger-list > *:nth-child(7) { transition-delay: 360ms; }
 .stagger-list > *:nth-child(n + 8) { transition-delay: 420ms; }
 
-/* ---------- Nav underline (see src/components/Header.tsx) ----------
-   Desktop only — on mobile the nav is an off-canvas panel where each link
-   already gets a full-width border-bottom divider, so the underline is
-   redundant there and would misalign with the wider mobile padding. */
-@media (min-width: 768px) {
-  .nav-link {
-    position: relative;
-  }
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 14px;
-    right: 14px;
-    bottom: 6px;
-    height: 2px;
-    background: #cc071e;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s cubic-bezier(0.16, 0.8, 0.32, 1);
-  }
-  .nav-link:hover::after {
-    transform: scaleX(1);
-  }
-}
+/* Nav underline is a single shared bar rendered by Header.tsx itself (the
+   `indicator` span, absolutely positioned inside the <nav>), not a per-link
+   ::after — that's what lets it visibly slide from one nav item to the next
+   on hover instead of each link fading its own underline in place. See
+   Header.tsx for the hover/active-route measuring logic. */
 
 /* ---------- Scroll progress bar (see src/components/ScrollProgress.tsx) ---------- */
 .scroll-progress {

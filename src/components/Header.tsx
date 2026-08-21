@@ -25,13 +25,17 @@ export function Header({
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href || pathname?.startsWith(`${href}/`);
 
-  // Desktop-only sliding underline that tracks the active nav link (mobile
-  // gets a full-width border-bottom per link instead, see the nav className
-  // below, so no indicator is rendered there). Measured via DOM offsets
-  // rather than kept in React state per-link, since it needs to react to
-  // both route changes and resizes/font-load reflows.
+  // Desktop-only sliding underline (mobile gets a full-width border-bottom
+  // per link instead, see the nav className below, so no indicator is
+  // rendered there). Rests under the active route's link; while the mouse
+  // is over the nav it glides over to whichever link is hovered instead,
+  // then glides back on mouseleave — a single shared bar, not one ::after
+  // per link, which is what makes it visibly travel between items. Measured
+  // via DOM offsets rather than kept in React state per-link, since it
+  // needs to react to route changes, hover, resizes and font-load reflows.
   const navRef = useRef<HTMLElement | null>(null);
   const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
 
   // Header rests a bit larger, then eases into a more compact bar once the
   // page has scrolled a little (desktop only — the md: classes below; on
@@ -48,12 +52,18 @@ export function Header({
   useEffect(() => {
     const measure = () => {
       const nav = navRef.current;
-      const active = nav?.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
-      if (!nav || !active) {
+      if (!nav) {
         setIndicator(null);
         return;
       }
-      setIndicator({ left: active.offsetLeft, width: active.offsetWidth });
+      const target = hoveredHref
+        ? nav.querySelector<HTMLAnchorElement>(`a[data-nav-target="${hoveredHref}"]`)
+        : nav.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
+      if (!target) {
+        setIndicator(null);
+        return;
+      }
+      setIndicator({ left: target.offsetLeft, width: target.offsetWidth });
     };
     measure();
     // Re-measure once more after the header's grow/shrink transition below
@@ -66,7 +76,7 @@ export function Header({
       window.removeEventListener("resize", measure);
       clearTimeout(settleTimer);
     };
-  }, [pathname, isScrolled]);
+  }, [pathname, isScrolled, hoveredHref]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white">
@@ -88,6 +98,7 @@ export function Header({
 
         <nav
           ref={navRef}
+          onMouseLeave={() => setHoveredHref(null)}
           className={`fixed inset-x-0 top-[76px] z-40 flex h-[calc(100vh-76px)] flex-col items-stretch gap-0 overflow-y-auto bg-white p-5 transition-transform duration-300 ease-out md:relative md:inset-auto md:h-auto md:translate-y-0 md:flex-row md:items-center md:gap-0.5 md:bg-transparent md:p-0 md:transition-none ${
             open ? "translate-y-0" : "-translate-y-[120%]"
           }`}
@@ -96,8 +107,10 @@ export function Header({
             <Link
               key={item.href}
               href={item.href}
+              data-nav-target={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               onClick={() => setOpen(false)}
+              onMouseEnter={() => setHoveredHref(item.href)}
               className={`nav-link border-b border-line px-3.5 py-4 text-[15px] font-bold uppercase tracking-wide text-grey transition-[color,padding,font-size] duration-300 ease-out hover:text-primary md:border-b-0 md:tracking-[.05em] ${
                 isScrolled ? "md:py-2.5 md:text-[13px]" : "md:py-[14px] md:text-[14px]"
               } ${isActive(item.href) ? "text-primary" : ""}`}
