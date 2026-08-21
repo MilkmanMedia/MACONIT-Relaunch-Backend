@@ -196,6 +196,10 @@ body {
   background-image: repeating-linear-gradient(135deg, rgba(20, 20, 26, 0.05) 0 1px, transparent 1px 34px);
   pointer-events: none;
   animation: heroPatternFade 1.4s cubic-bezier(0.16, 0.8, 0.32, 1) 0.2s both;
+  /* Soften the pattern's left edge (where it starts, at 40% from the hero's
+     left) into a gradual fade instead of a hard cutoff. */
+  mask-image: linear-gradient(to right, transparent, black 22%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 22%);
 }
 @keyframes heroPatternFade {
   from {

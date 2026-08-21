@@ -58,21 +58,16 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <section className="py-16">
         <div className="mx-auto max-w-container px-6">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-[120px_1fr]">
-            <span />
-            <div>
-              <h2 className="mb-8 text-[clamp(26px,3vw,38px)] font-extrabold tracking-tight">
-                {l === "de" ? "Leistungen im Detail" : "Services in detail"}
-              </h2>
-              <ul className="max-w-[760px] text-[15px] leading-relaxed text-ink">
-                {service.items.map((item) => (
-                  <li key={item} className="border-t border-line py-2.5 last:border-b">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <h2 className="mb-8 text-[clamp(26px,3vw,38px)] font-extrabold tracking-tight">
+            {l === "de" ? "Leistungen im Detail" : "Services in detail"}
+          </h2>
+          <ul className="max-w-[760px] text-[15px] leading-relaxed text-ink">
+            {service.items.map((item) => (
+              <li key={item} className="border-t border-line py-2.5 last:border-b">
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -85,23 +80,20 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <section className="py-16">
         <div className="mx-auto max-w-container px-6">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-[120px_1fr]">
-            <span />
-            <div className="max-w-[760px]">
-              <h2 className="mb-8 text-[clamp(26px,3vw,38px)] font-extrabold tracking-tight">
-                {l === "de" ? "Referenz" : "Reference"}
-              </h2>
-              <p className="mb-5 text-[15px] leading-relaxed text-grey">{service.referenceClient}</p>
-              <Link
-                href={`/${l}/references`}
-                className="group inline-flex items-center gap-2 text-[15px] font-bold text-ink"
-              >
-                {l === "de" ? "Referenz ansehen" : "View reference"}
-                <span className="text-primary transition-transform duration-200 ease-out group-hover:translate-x-1">
-                  <ArrowIcon />
-                </span>
-              </Link>
-            </div>
+          <div className="max-w-[760px]">
+            <h2 className="mb-8 text-[clamp(26px,3vw,38px)] font-extrabold tracking-tight">
+              {l === "de" ? "Referenz" : "Reference"}
+            </h2>
+            <p className="mb-5 text-[15px] leading-relaxed text-grey">{service.referenceClient}</p>
+            <Link
+              href={`/${l}/references`}
+              className="group inline-flex items-center gap-2 text-[15px] font-bold text-ink"
+            >
+              {l === "de" ? "Referenz ansehen" : "View reference"}
+              <span className="text-primary transition-transform duration-200 ease-out group-hover:translate-x-1">
+                <ArrowIcon />
+              </span>
+            </Link>
           </div>
         </div>
       </section>
