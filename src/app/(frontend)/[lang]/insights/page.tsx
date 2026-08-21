@@ -54,7 +54,7 @@ export default async function InsightsPage({ params }: { params: Promise<{ lang:
                     <h4 className="text-xl font-bold tracking-tight">{p.title}</h4>
                     {p.excerpt && <p className="mt-1 text-[15px] text-grey">{p.excerpt}</p>}
                   </div>
-                  <span className="hidden text-xl text-primary transition-transform duration-200 ease-out group-hover:translate-x-1 md:inline-flex">
+                  <span className="hidden -translate-x-1.5 text-xl text-primary opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 md:inline-flex">
                     <ArrowIcon />
                   </span>
                 </Link>

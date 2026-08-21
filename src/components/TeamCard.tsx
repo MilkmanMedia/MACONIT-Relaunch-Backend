@@ -7,7 +7,7 @@ export function TeamCard({ member }: { member: TeamMember }) {
   return (
     <div className="relative bg-bg-alt p-7 transition-all duration-200 ease-out hover:z-10 hover:-translate-y-[3px] hover:shadow-lift">
       <div
-        className="mb-4 flex aspect-square items-center justify-center border border-line font-mono text-[11px] text-grey-light"
+        className="photo-placeholder mb-4 flex aspect-square items-center justify-center border border-line font-mono text-[11px] text-grey-light"
         style={
           photo?.url
             ? undefined

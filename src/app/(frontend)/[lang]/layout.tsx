@@ -4,6 +4,8 @@ import { dictionaries } from "@/content/dictionaries";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Maintenance } from "@/components/Maintenance";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { BackToTop } from "@/components/BackToTop";
 import { getSiteSettings } from "@/lib/queries";
 
 export function generateStaticParams() {
@@ -38,9 +40,11 @@ export default async function LangLayout({
 
   return (
     <>
+      <ScrollProgress />
       <Header lang={lang as Locale} dict={dict} altHref={`/${altLang}`} />
       <main>{children}</main>
       <Footer lang={lang as Locale} dict={dict} settings={settings} />
+      <BackToTop lang={lang as Locale} />
     </>
   );
 }

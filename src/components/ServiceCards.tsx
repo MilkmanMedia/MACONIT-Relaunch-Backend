@@ -15,7 +15,7 @@ export function ServiceCards({ services, lang }: { services: ServiceContent[]; l
           <span className="text-base font-bold text-grey-light">{String(i + 1).padStart(2, "0")}</span>
           <h3 className="text-[26px] font-extrabold tracking-tight">{s.title}</h3>
           <p className="text-[15px] text-grey">{s.short}</p>
-          <span className="hidden text-[22px] text-primary transition-transform duration-200 ease-out group-hover:translate-x-1 md:inline-flex">
+          <span className="hidden -translate-x-1.5 text-[22px] text-primary opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 md:inline-flex">
             <ArrowIcon />
           </span>
         </Link>

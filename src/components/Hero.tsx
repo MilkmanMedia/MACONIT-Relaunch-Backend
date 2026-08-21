@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Kicker } from "./Kicker";
+import { HeroPattern } from "./HeroPattern";
 import type { BreadcrumbItem } from "./Breadcrumb";
 import { Breadcrumb } from "./Breadcrumb";
 
@@ -49,7 +50,8 @@ export function Hero({
 
   if (split) {
     return (
-      <section className="pb-[100px] pt-[120px]">
+      <section id="hero" className="relative overflow-hidden pb-[100px] pt-[120px]">
+        <HeroPattern />
         <div className="mx-auto max-w-container px-6">
           <div className="max-w-[1100px]">
             {breadcrumb && (
@@ -76,7 +78,7 @@ export function Hero({
   }
 
   return (
-    <section className="pb-20 pt-[100px]">
+    <section id="hero" className="pb-20 pt-[100px]">
       <div className="mx-auto max-w-container px-6">
         <div className="max-w-[900px]">
           {breadcrumb && (

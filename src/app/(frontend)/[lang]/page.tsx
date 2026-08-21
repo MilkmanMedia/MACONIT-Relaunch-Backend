@@ -85,7 +85,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               </Link>
             </div>
             <div
-              className="flex aspect-[4/3] items-center justify-center border border-line font-mono text-[11px] text-grey-light"
+              className="photo-placeholder flex aspect-[4/3] items-center justify-center border border-line font-mono text-[11px] text-grey-light"
               style={{
                 backgroundImage: "repeating-linear-gradient(135deg, #eeede9 0, #eeede9 10px, #e6e4df 10px, #e6e4df 20px)",
               }}
