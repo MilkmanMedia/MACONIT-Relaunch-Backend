@@ -12,6 +12,14 @@ import { Kicker } from "@/components/Kicker";
 import { Reveal } from "@/components/Reveal";
 import { getCaseStudies } from "@/lib/queries";
 
+// The [lang] layout already sets `dynamic = "force-dynamic"`, but the build
+// still categorized this exact route (the locale-prefix root, e.g. "/de")
+// as a prerendered ("SSG") page while every sibling route (/de/about,
+// /de/references, ...) came out dynamic — and only this route 500'd in
+// production while the others served correctly. Forcing it explicitly here
+// opts this one route out of static generation to rule that out.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
