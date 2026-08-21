@@ -4,6 +4,9 @@ import { useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 
+const fieldClass =
+  "w-full border-0 border-b-[1.5px] border-line bg-transparent py-3.5 font-sans text-base transition-colors focus:border-primary focus:outline-none";
+
 export function ContactForm({
   labels,
   lang,
@@ -19,33 +22,35 @@ export function ContactForm({
         e.preventDefault();
         setSubmitted(true);
       }}
-      className="rounded border border-gray-200 p-7"
     >
-      <div className="mb-4">
-        <label className="mb-1.5 block text-sm font-semibold">{labels.name}</label>
-        <input type="text" required className="w-full rounded border border-gray-300 px-3.5 py-2.5" />
+      <div className="mb-[22px]">
+        <label className="mb-2 block text-[13px] font-bold">{labels.name}</label>
+        <input type="text" required className={fieldClass} />
       </div>
-      <div className="mb-4">
-        <label className="mb-1.5 block text-sm font-semibold">{labels.email}</label>
-        <input type="email" required className="w-full rounded border border-gray-300 px-3.5 py-2.5" />
+      <div className="mb-[22px]">
+        <label className="mb-2 block text-[13px] font-bold">{labels.email}</label>
+        <input type="email" required className={fieldClass} />
       </div>
-      <div className="mb-4">
-        <label className="mb-1.5 block text-sm font-semibold">{labels.company}</label>
-        <input type="text" className="w-full rounded border border-gray-300 px-3.5 py-2.5" />
+      <div className="mb-[22px]">
+        <label className="mb-2 block text-[13px] font-bold">{labels.company}</label>
+        <input type="text" className={fieldClass} />
       </div>
-      <div className="mb-4">
-        <label className="mb-1.5 block text-sm font-semibold">{labels.topic}</label>
-        <select className="w-full rounded border border-gray-300 px-3.5 py-2.5">
+      <div className="mb-[22px]">
+        <label className="mb-2 block text-[13px] font-bold">{labels.topic}</label>
+        <select className={fieldClass}>
           {labels.topicOptions.map((o) => (
             <option key={o}>{o}</option>
           ))}
         </select>
       </div>
       <div className="mb-5">
-        <label className="mb-1.5 block text-sm font-semibold">{labels.message}</label>
-        <textarea required rows={5} className="w-full rounded border border-gray-300 px-3.5 py-2.5" />
+        <label className="mb-2 block text-[13px] font-bold">{labels.message}</label>
+        <textarea required rows={5} className={`${fieldClass} resize-y`} />
       </div>
-      <button type="submit" className="rounded-full bg-primary px-6 py-3.5 font-bold text-white hover:bg-primary-dark">
+      <button
+        type="submit"
+        className="bg-primary px-7 py-4 text-sm font-bold tracking-wide text-white transition-all hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-btn"
+      >
         {labels.submit}
       </button>
       {submitted && (

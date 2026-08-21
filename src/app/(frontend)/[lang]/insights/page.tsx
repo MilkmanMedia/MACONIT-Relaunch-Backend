@@ -4,6 +4,8 @@ import { isLocale, type Locale } from "@/lib/i18n";
 import { dictionaries } from "@/content/dictionaries";
 import { notFound } from "next/navigation";
 import { Hero } from "@/components/Hero";
+import { ArrowIcon } from "@/components/Icons";
+import { Reveal } from "@/components/Reveal";
 import { getPosts } from "@/lib/queries";
 
 export async function generateMetadata({
@@ -28,42 +30,50 @@ export default async function InsightsPage({ params }: { params: Promise<{ lang:
   return (
     <>
       <Hero eyebrow="Insights" headline={i.title} sub={i.intro} />
-      <section className="py-16">
+      <Reveal as="section" className="pb-16 pt-2">
         <div className="mx-auto max-w-container px-6">
-          <div className="mb-8 rounded border border-gray-200 bg-bg-alt p-4 text-sm">
-            <strong>{i.noteTitle}:</strong> {i.noteText}
+          <div className="mb-[30px] border border-line bg-bg-alt p-6 text-[15px] text-grey">
+            <strong className="text-ink">{i.noteTitle}:</strong> {i.noteText}
           </div>
 
           {posts.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2">
-              {posts.map((p) => (
+            <div className="stagger-list border-t border-line">
+              {posts.map((p, idx) => (
                 <Link
                   key={p.id}
                   href={`/${l}/insights/${p.slug}`}
-                  className="block rounded border border-gray-200 p-6 transition hover:-translate-y-1 hover:shadow-xl"
+                  className="group grid grid-cols-1 items-center gap-1.5 border-b border-line py-9 text-ink transition-colors hover:bg-bg-alt md:grid-cols-[120px_1fr_24px] md:gap-8"
                 >
-                  {p.category && (
-                    <span className="mb-1 block text-[13px] font-bold uppercase tracking-wide text-primary">{p.category}</span>
-                  )}
-                  <h3 className="text-lg font-bold">{p.title}</h3>
-                  {p.excerpt && <p className="mt-2 text-grey">{p.excerpt}</p>}
+                  <span className="text-xs font-bold uppercase tracking-wide text-grey-light">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    {p.category && (
+                      <span className="mb-1.5 block text-[12.5px] font-bold uppercase tracking-wide text-primary">{p.category}</span>
+                    )}
+                    <h4 className="text-xl font-bold tracking-tight">{p.title}</h4>
+                    {p.excerpt && <p className="mt-1 text-[15px] text-grey">{p.excerpt}</p>}
+                  </div>
+                  <span className="hidden text-xl text-primary transition-transform duration-200 ease-out group-hover:translate-x-1 md:inline-flex">
+                    <ArrowIcon />
+                  </span>
                 </Link>
               ))}
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="stagger-list border-t border-line">
               {i.topics.map((t) => (
-                <div key={t} className="rounded border border-gray-200 p-6">
-                  <span className="mb-1 block text-[13px] font-bold uppercase tracking-wide text-primary">
+                <div key={t} className="border-b border-line py-9">
+                  <span className="mb-1.5 block text-[12.5px] font-bold uppercase tracking-wide text-primary">
                     {l === "de" ? "Themenvorschlag" : "Topic idea"}
                   </span>
-                  <h4 className="text-lg font-bold">{t}</h4>
+                  <h4 className="text-xl font-bold tracking-tight">{t}</h4>
                 </div>
               ))}
             </div>
           )}
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }

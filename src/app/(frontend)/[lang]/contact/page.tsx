@@ -30,23 +30,23 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
   return (
     <>
       <Hero headline={c.headline} sub={c.sub} />
-      <section className="pb-16">
-        <div className="mx-auto grid max-w-container gap-10 px-6 md:grid-cols-[1.3fr_1fr]">
+      <section className="pb-16 pt-0">
+        <div className="mx-auto grid max-w-container gap-[60px] px-6 md:grid-cols-[1.2fr_1fr]">
           <ContactForm labels={c.formLabels} lang={l} />
-          <div className="space-y-6">
+          <div className="border-t border-line pt-10">
             {locations.map((loc) => (
-              <div key={loc.name} className="rounded border border-gray-200 p-6">
-                <h4 className="mb-1 text-lg font-bold">{loc.name}</h4>
-                <strong>{loc.street}</strong>
+              <div key={loc.name} className="mb-8">
+                <h4 className="mb-2.5 text-[13px] uppercase tracking-wide text-grey-light">{loc.name}</h4>
+                <strong className="text-base">{loc.street}</strong>
                 <br />
                 {loc.zipCity}
                 <br />
                 Tel. {loc.phone}
               </div>
             ))}
-            <div className="rounded border border-gray-200 p-6">
-              <h4 className="mb-1 text-lg font-bold">E-Mail</h4>
-              <a href={`mailto:${email}`} className="font-semibold text-primary">
+            <div>
+              <h4 className="mb-2.5 text-[13px] uppercase tracking-wide text-grey-light">E-Mail</h4>
+              <a href={`mailto:${email}`} className="border-b-2 border-primary pb-0.5 font-semibold">
                 {email}
               </a>
             </div>

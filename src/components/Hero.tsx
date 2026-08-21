@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { HeroGlow } from "./HeroGlow";
+import { Kicker } from "./Kicker";
+import type { BreadcrumbItem } from "./Breadcrumb";
+import { Breadcrumb } from "./Breadcrumb";
 
 export function Hero({
   eyebrow,
@@ -9,6 +11,8 @@ export function Hero({
   ctaPrimaryHref,
   ctaSecondary,
   ctaSecondaryHref,
+  split,
+  breadcrumb,
 }: {
   eyebrow?: string;
   headline: string;
@@ -17,42 +21,79 @@ export function Hero({
   ctaPrimaryHref?: string;
   ctaSecondary?: string;
   ctaSecondaryHref?: string;
+  /** Home-page variant: bigger headline, then a bordered row with copy + CTAs. */
+  split?: boolean;
+  /** Service detail pages: "Start / Leistungen / <service>" trail. */
+  breadcrumb?: BreadcrumbItem[];
 }) {
+  const ctas = (ctaPrimary || ctaSecondary) && (
+    <div className="flex flex-wrap gap-3.5">
+      {ctaPrimary && (
+        <Link
+          href={ctaPrimaryHref || "#"}
+          className="bg-primary px-7 py-4 text-sm font-bold tracking-wide text-white transition-all hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-btn"
+        >
+          {ctaPrimary}
+        </Link>
+      )}
+      {ctaSecondary && (
+        <Link
+          href={ctaSecondaryHref || "#"}
+          className="border-[1.5px] border-ink px-7 py-4 text-sm font-bold tracking-wide transition-all hover:-translate-y-0.5 hover:bg-ink hover:text-white"
+        >
+          {ctaSecondary}
+        </Link>
+      )}
+    </div>
+  );
+
+  if (split) {
+    return (
+      <section className="pb-[100px] pt-[120px]">
+        <div className="mx-auto max-w-container px-6">
+          <div className="max-w-[1100px]">
+            {breadcrumb && (
+              <div className="animate-hero-rise">
+                <Breadcrumb items={breadcrumb} />
+              </div>
+            )}
+            {eyebrow && (
+              <div className="animate-hero-rise [animation-delay:.06s]">
+                <Kicker>{eyebrow}</Kicker>
+              </div>
+            )}
+            <h1 className="animate-hero-rise mb-10 text-[clamp(44px,7.5vw,104px)] font-extrabold leading-[1.02] tracking-tight [animation-delay:.12s]">
+              {headline}
+            </h1>
+            <div className="animate-hero-rise grid grid-cols-1 items-end gap-[60px] border-t border-line pt-8 [animation-delay:.2s] md:grid-cols-[1fr_420px]">
+              <p className="max-w-[640px] text-[19px] leading-relaxed text-grey">{sub}</p>
+              {ctas}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-b from-white to-bg-alt py-24">
-      <span className="hero-mesh hero-mesh-1 animate-mesh-slow" aria-hidden="true" />
-      <span className="hero-mesh hero-mesh-2 animate-mesh-slower" aria-hidden="true" />
-      <HeroGlow />
-      <div className="relative mx-auto max-w-container px-6">
-        <div className="max-w-[780px]">
-          {eyebrow && (
-            <span className="animate-hero-rise mb-2.5 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-primary [animation-delay:.02s]">
-              <span className="h-0.5 w-4 rounded bg-primary" />
-              {eyebrow}
-            </span>
+    <section className="pb-20 pt-[100px]">
+      <div className="mx-auto max-w-container px-6">
+        <div className="max-w-[900px]">
+          {breadcrumb && (
+            <div className="animate-hero-rise">
+              <Breadcrumb items={breadcrumb} />
+            </div>
           )}
-          <h1 className="animate-hero-rise text-4xl font-extrabold tracking-tight [animation-delay:.08s] sm:text-5xl">
+          {eyebrow && (
+            <div className="animate-hero-rise [animation-delay:.06s]">
+              <Kicker>{eyebrow}</Kicker>
+            </div>
+          )}
+          <h1 className="animate-hero-rise mb-7 text-[clamp(38px,6vw,72px)] font-extrabold leading-[1.05] tracking-tight [animation-delay:.12s]">
             {headline}
           </h1>
-          <p className="animate-hero-rise mt-4 max-w-[640px] text-lg text-grey [animation-delay:.16s]">{sub}</p>
-          <div className="animate-hero-rise mt-7 flex flex-wrap gap-3.5 [animation-delay:.24s]">
-            {ctaPrimary && (
-              <Link
-                href={ctaPrimaryHref || "#"}
-                className="btn-shine rounded-full bg-gradient-to-br from-primary to-primary-dark px-6 py-3.5 font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-glow"
-              >
-                {ctaPrimary}
-              </Link>
-            )}
-            {ctaSecondary && (
-              <Link
-                href={ctaSecondaryHref || "#"}
-                className="rounded-full border border-gray-200 px-6 py-3.5 font-bold transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-              >
-                {ctaSecondary}
-              </Link>
-            )}
-          </div>
+          <p className="animate-hero-rise max-w-[680px] text-lg text-grey [animation-delay:.2s]">{sub}</p>
+          {ctas && <div className="animate-hero-rise mt-7 [animation-delay:.2s]">{ctas}</div>}
         </div>
       </div>
     </section>

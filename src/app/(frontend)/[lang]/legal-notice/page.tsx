@@ -24,7 +24,7 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ la
     <section className="py-16">
       <div className="mx-auto max-w-[760px] px-6">
         <h1 className="text-3xl font-extrabold">{dict.legal.imprintTitle}</h1>
-        <div className="mt-6 rounded border border-gray-200 bg-bg-alt p-4 text-sm">{dict.legal.imprintNote}</div>
+        <div className="mt-6 border border-line bg-bg-alt p-6 text-[15px] text-grey">{dict.legal.imprintNote}</div>
       </div>
     </section>
   );

@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { Timeline } from "@/components/Timeline";
 import { Faq } from "@/components/Faq";
 import { CtaBanner } from "@/components/CtaBanner";
+import { SectionHead } from "@/components/SectionHead";
 import { ArrowIcon } from "@/components/Icons";
 
 export function generateStaticParams() {
@@ -48,46 +49,66 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         sub={service.hero.subheadline}
         ctaPrimary={service.hero.cta}
         ctaPrimaryHref={`/${l}/contact`}
+        breadcrumb={[
+          { label: l === "de" ? "Start" : "Home", href: `/${l}/` },
+          { label: l === "de" ? "Leistungen" : "Services", href: `/${l}/services` },
+          { label: service.title },
+        ]}
       />
 
       <section className="py-16">
         <div className="mx-auto max-w-container px-6">
-          <h2 className="mb-8 text-3xl font-extrabold">{l === "de" ? "Leistungen im Detail" : "Services in detail"}</h2>
-          <ul className="grid max-w-[760px] gap-3.5">
-            {service.items.map((item) => (
-              <li key={item} className="relative pl-6">
-                <span className="absolute left-0 font-extrabold text-primary">→</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="bg-bg-alt py-16">
-        <div className="mx-auto max-w-container px-6">
-          <h2 className="mb-8 text-3xl font-extrabold">{l === "de" ? "Vorgehen" : "Our approach"}</h2>
-          <Timeline steps={service.process} />
-        </div>
-      </section>
-
-      <section className="py-16">
-        <div className="mx-auto max-w-container px-6">
-          <div className="max-w-[760px] rounded border border-gray-200 p-6">
-            <span className="mb-1 block text-[13px] font-bold uppercase tracking-wide text-primary">
-              {l === "de" ? "Referenz" : "Reference"}
-            </span>
-            <p className="mt-2.5 text-base">{service.referenceClient}</p>
-            <Link href={`/${l}/references`} className="mt-3 inline-flex items-center gap-1.5 font-bold text-primary">
-              {l === "de" ? "Referenz ansehen" : "View reference"} <ArrowIcon />
-            </Link>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[120px_1fr]">
+            <span />
+            <div>
+              <h2 className="mb-8 text-[clamp(26px,3vw,38px)] font-extrabold tracking-tight">
+                {l === "de" ? "Leistungen im Detail" : "Services in detail"}
+              </h2>
+              <ul className="max-w-[760px] text-[15px] leading-relaxed text-ink">
+                {service.items.map((item) => (
+                  <li key={item} className="border-t border-line py-2.5 last:border-b">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="bg-bg-alt py-16">
         <div className="mx-auto max-w-container px-6">
-          <h2 className="mb-8 text-3xl font-extrabold">FAQ</h2>
+          <SectionHead title={l === "de" ? "Vorgehen" : "Our approach"} />
+          <Timeline steps={service.process} />
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="mx-auto max-w-container px-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[120px_1fr]">
+            <span />
+            <div className="max-w-[760px]">
+              <h2 className="mb-8 text-[clamp(26px,3vw,38px)] font-extrabold tracking-tight">
+                {l === "de" ? "Referenz" : "Reference"}
+              </h2>
+              <p className="mb-5 text-[15px] leading-relaxed text-grey">{service.referenceClient}</p>
+              <Link
+                href={`/${l}/references`}
+                className="group inline-flex items-center gap-2 text-[15px] font-bold text-ink"
+              >
+                {l === "de" ? "Referenz ansehen" : "View reference"}
+                <span className="text-primary transition-transform duration-200 ease-out group-hover:translate-x-1">
+                  <ArrowIcon />
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-bg-alt py-16">
+        <div className="mx-auto max-w-container px-6">
+          <SectionHead title="FAQ" />
           <div className="max-w-[760px]">
             <Faq items={service.faq} />
           </div>

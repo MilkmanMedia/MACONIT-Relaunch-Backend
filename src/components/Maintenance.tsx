@@ -20,13 +20,13 @@ export function Maintenance({ dict, settings }: { dict: Dictionary; settings: Si
         priority
         className="mb-10 h-9 w-auto"
       />
-      <div className="mb-6 h-1 w-14 rounded-full bg-gradient-to-r from-primary to-primary-dark" />
+      <div className="mb-6 h-0.5 w-14 bg-primary" />
       <h1 className="mb-4 text-3xl font-extrabold text-ink md:text-4xl">{dict.maintenance.title}</h1>
       <p className="max-w-md text-lg text-grey">{message}</p>
       {settings?.email && (
         <a
           href={`mailto:${settings.email}`}
-          className="mt-8 rounded-full bg-gradient-to-br from-primary to-primary-dark px-6 py-3 text-[15px] font-bold text-white transition-all hover:-translate-y-0.5 hover:shadow-glow"
+          className="mt-8 bg-primary px-7 py-4 text-sm font-bold tracking-wide text-white transition-all hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-btn"
         >
           {settings.email}
         </a>

@@ -1,66 +1,55 @@
 import type { Config } from "tailwindcss";
 
-// Brand tokens confirmed from MACONIT_original.ai logo spec (see Relaunch-Konzept, Kapitel 5.2).
-// Mirrors static-site/src/style.css 1:1 — that design was visually verified with
-// Playwright screenshots; keep both in sync when adjusting the design system.
+// Design tokens ported 1:1 from static-site/src/style.css (the "Claude
+// Design" agency-style redesign, Aug 2026): bold Inter typography, thin
+// hairline dividers, sharp 2px corners, flat brand-red accents, near-zero
+// motion. Keep both files in sync when adjusting the design system — the
+// static build is the one that gets visually verified with Playwright, this
+// one is verified via Render build logs (no local npm registry access).
 export default {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#CC071E", // Eras Bold ITC red — CMYK 15/100/100/0
+          DEFAULT: "#CC071E",
           dark: "#A30518",
-          light: "#FF5A68",
         },
-        ink: "#1B1B1E",
+        ink: "#14141A",
         grey: {
-          DEFAULT: "#58585A", // Eras Demi ITC grey — CMYK 0/0/0/80
-          light: "#83838A",
+          DEFAULT: "#58585A",
+          light: "#8F8F92",
         },
         bg: {
-          alt: "#F6F5F8",
-          deep: "#131316",
+          alt: "#FAFAF8",
+          deep: "#14141A",
         },
+        line: "#E2E0DC", // hairline dividers/borders — named to avoid clashing with Tailwind's border-* utilities
       },
       borderRadius: {
-        DEFAULT: "10px",
-        lg: "14px",
+        DEFAULT: "2px",
+        lg: "2px",
       },
       fontFamily: {
-        // Eras Bold/Demi ITC are commercial Monotype fonts and cannot be bundled here —
-        // see README "Typografie" section for licensing options. System-ui stack is the
-        // safe, dependency-free default until a licensed web font is added.
-        sans: ["system-ui", "-apple-system", "Segoe UI", "Helvetica Neue", "Arial", "sans-serif"],
+        sans: ["var(--font-inter)", "Segoe UI", "Helvetica Neue", "Arial", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        container: "1180px",
+        container: "1320px",
       },
       boxShadow: {
-        glow: "0 20px 44px -14px rgba(204, 7, 30, 0.28)",
-        lift: "0 16px 36px -12px rgba(20, 20, 22, 0.18)",
+        lift: "0 16px 28px -16px rgba(20, 20, 26, 0.2)",
+        liftLg: "0 22px 40px -22px rgba(20, 20, 26, 0.28)",
+        btn: "0 10px 24px -10px rgba(204, 7, 30, 0.45)",
+        btnDark: "0 10px 24px -14px rgba(20, 20, 26, 0.3)",
       },
       keyframes: {
-        meshSpin: { to: { transform: "rotate(360deg)" } },
         heroRise: {
-          from: { opacity: "0", transform: "translateY(16px)" },
+          from: { opacity: "0", transform: "translateY(14px)" },
           to: { opacity: "1", transform: "none" },
-        },
-        ctaShift: {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
-        marquee: {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(-50%)" },
         },
       },
       animation: {
-        "mesh-slow": "meshSpin 46s linear infinite",
-        "mesh-slower": "meshSpin 60s linear infinite reverse",
-        "hero-rise": "heroRise .7s cubic-bezier(0.16,0.8,0.32,1) both",
-        "cta-shift": "ctaShift 10s ease infinite",
-        marquee: "marquee 30s linear infinite",
+        "hero-rise": "heroRise .6s cubic-bezier(0.16,0.8,0.32,1) both",
       },
     },
   },

@@ -4,6 +4,10 @@ import { dictionaries } from "@/content/dictionaries";
 import { notFound } from "next/navigation";
 import { Hero } from "@/components/Hero";
 import { TeamCard } from "@/components/TeamCard";
+import { LocationGrid } from "@/components/LocationGrid";
+import { SectionHead } from "@/components/SectionHead";
+import { Kicker } from "@/components/Kicker";
+import { Reveal } from "@/components/Reveal";
 import { getTeamMembers, getSiteSettings } from "@/lib/queries";
 
 export async function generateMetadata({
@@ -43,11 +47,11 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
         </div>
       </section>
 
-      <section className="bg-bg-alt py-16">
+      <Reveal as="section" className="bg-bg-alt py-16">
         <div className="mx-auto max-w-container px-6">
-          <h2 className="mb-8 text-3xl font-extrabold">{a.teamTitle}</h2>
+          <Kicker>{a.teamTitle}</Kicker>
           {team.length > 0 ? (
-            <div className="grid gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            <div className="stagger-list grid gap-px border border-line bg-line sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
               {team.map((m) => (
                 <TeamCard key={m.id} member={m} />
               ))}
@@ -56,25 +60,15 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
             <p className="italic text-grey-light">{a.teamNote}</p>
           )}
         </div>
-      </section>
+      </Reveal>
 
       {locations.length > 0 && (
-        <section className="py-16">
-          <div className="mx-auto grid max-w-container gap-8 px-6 md:grid-cols-2">
-            {locations.map((loc) => (
-              <div key={loc.name} className="rounded border border-gray-200 p-6">
-                <h4 className="mb-1 text-lg font-bold">{loc.name}</h4>
-                <p className="text-grey">
-                  {loc.street}
-                  <br />
-                  {loc.zipCity}
-                  <br />
-                  Tel. {loc.phone}
-                </p>
-              </div>
-            ))}
+        <Reveal as="section" className="py-16">
+          <div className="mx-auto max-w-container px-6">
+            <SectionHead kicker={l === "de" ? "Standorte" : "Locations"} title={l === "de" ? "Vor Ort und persönlich" : "On the ground, in person"} />
+            <LocationGrid locations={locations} />
           </div>
-        </section>
+        </Reveal>
       )}
     </>
   );

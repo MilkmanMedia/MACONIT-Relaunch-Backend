@@ -28,14 +28,14 @@ export default async function ReferencesPage({ params }: { params: Promise<{ lan
   return (
     <>
       <Hero eyebrow={l === "de" ? "Referenzen" : "References"} headline={r.title} sub={r.intro} />
-      <section className="py-16">
+      <section className="pb-16 pt-2">
         <div className="mx-auto max-w-container px-6">
-          <div className="mb-8 rounded border border-gray-200 bg-bg-alt p-4 text-sm">
-            <strong>{r.noteTitle}:</strong> {r.noteText}
+          <div className="mb-[30px] border border-line bg-bg-alt p-6 text-[15px] text-grey">
+            <strong className="text-ink">{r.noteTitle}:</strong> {r.noteText}
           </div>
 
           {caseStudies.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="border-t border-line">
               {caseStudies.map((c) => (
                 <CaseStudyCard key={c.id} study={c} lang={l} />
               ))}

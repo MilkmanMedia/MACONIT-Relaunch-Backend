@@ -97,10 +97,10 @@ const de: Dictionary = {
   },
   trustStats: [
     { value: "2005", label: "Am Markt seit" },
-    { value: "30+", label: "Abgeschlossene Projekte" },
+    { value: "60+", label: "Zufriedene Kunden" },
     { value: "7", label: "Senior-Experten in Deutschland" },
-    { value: "1", label: "Eigenes Nearshoring-Team in Budapest" },
-    { value: "2", label: "Standorte: Puchheim & München" },
+    { value: "8", label: "Branchen mit Referenzprojekten" },
+    { value: "20+", label: "Jahre Erfahrung mit Langzeitsystemen" },
   ],
   services: [
     {
@@ -282,10 +282,10 @@ const en: Dictionary = {
   },
   trustStats: [
     { value: "2005", label: "On the market since" },
-    { value: "30+", label: "Completed projects" },
+    { value: "60+", label: "Satisfied clients" },
     { value: "7", label: "Senior experts in Germany" },
-    { value: "1", label: "Dedicated nearshoring team in Budapest" },
-    { value: "2", label: "Locations: Puchheim & Munich" },
+    { value: "8", label: "Industries with reference projects" },
+    { value: "20+", label: "Years of experience with long-lived systems" },
   ],
   services: [
     {

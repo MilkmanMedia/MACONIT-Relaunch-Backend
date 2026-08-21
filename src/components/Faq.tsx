@@ -10,22 +10,25 @@ export function Faq({ items }: { items: [string, string][] }) {
       {items.map(([q, a], i) => {
         const isOpen = openIndex === i;
         return (
-          <div
-            key={q}
-            className={`border-b border-gray-200 transition-colors ${isOpen ? "bg-gradient-to-r from-red-50/60 to-transparent" : ""}`}
-          >
+          <div key={q} className="border-b border-line">
             <button
-              className={`flex w-full items-center justify-between gap-4 px-1 py-5 text-left text-[16.5px] font-bold transition-colors ${
-                isOpen ? "text-primary" : ""
+              className={`flex w-full items-center justify-between gap-4 py-5 text-left text-[16.5px] font-bold transition-colors ${
+                isOpen ? "text-primary" : "text-ink"
               }`}
               aria-expanded={isOpen}
               onClick={() => setOpenIndex(isOpen ? -1 : i)}
             >
               {q}
-              <span className={`shrink-0 text-2xl font-normal text-primary transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>+</span>
+              <span
+                className={`shrink-0 text-xl font-normal text-primary transition-transform duration-200 ease-out ${
+                  isOpen ? "rotate-45" : ""
+                }`}
+              >
+                +
+              </span>
             </button>
-            <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96" : "max-h-0"}`}>
-              <p className="px-1 pb-[18px] text-[15.5px] text-grey">{a}</p>
+            <div className={`overflow-hidden transition-all duration-300 ease-out ${isOpen ? "max-h-96" : "max-h-0"}`}>
+              <p className="pb-[18px] text-[15px] text-grey">{a}</p>
             </div>
           </div>
         );
