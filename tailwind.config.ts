@@ -47,9 +47,28 @@ export default {
           from: { opacity: "0", transform: "translateY(14px)" },
           to: { opacity: "1", transform: "none" },
         },
+        // "/" root redirect page (see src/app/(frontend)/page.tsx) — mirrors
+        // static-site/src/build.js's buildRootRedirect() "Musterschnitt"
+        // concept 1:1: the diagonal hero pattern sweeps in via a mask-size
+        // reveal, the logo fades up, a thin bar counts the wait down.
+        redirectSweep: {
+          from: { "-webkit-mask-size": "0% 100%", "mask-size": "0% 100%" },
+          to: { "-webkit-mask-size": "100% 100%", "mask-size": "100% 100%" },
+        },
+        redirectLogoIn: {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "none" },
+        },
+        redirectFill: {
+          from: { width: "0%" },
+          to: { width: "100%" },
+        },
       },
       animation: {
         "hero-rise": "heroRise .6s cubic-bezier(0.16,0.8,0.32,1) both",
+        "redirect-sweep": "redirectSweep 1s cubic-bezier(0.16,0.8,0.32,1) both",
+        "redirect-logo-in": "redirectLogoIn .7s cubic-bezier(0.16,0.8,0.32,1) .5s both",
+        "redirect-fill": "redirectFill 1.15s linear both",
       },
     },
   },
