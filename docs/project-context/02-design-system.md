@@ -37,8 +37,7 @@ Keyframe-Animationen (fest in `tailwind.config.ts` hinterlegt, z. B.
 Marken-Kurve). Das ist ein kleiner, bereits vor der jüngsten Session
 bestehender Unterschied zwischen den Codebasen und wurde nicht angefasst.
 
-Grundprinzip der Optik: kantige, redaktionelle Agentur-Ästhetik
-(Publicis-Sapient/Interone-Richtung) — dicke Inter-Typografie, feine
+Grundprinzip der Optik: kantige, redaktionelle Agentur-Ästhetik — dicke Inter-Typografie, feine
 Haarlinien-Trenner, scharfe 2px-Ecken, flache Rot-Akzente, sehr
 zurückhaltende Bewegung. **Kein** Glow/Gradient/Glassmorphism (das war eine
 frühere, mittlerweile ersetzte Designrichtung — falls in älteren
